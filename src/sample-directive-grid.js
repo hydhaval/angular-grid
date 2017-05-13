@@ -140,7 +140,6 @@ angular.module('dhaval.directive.grid', [])
       },
       templateUrl: '/__templates__/sample-directive-grid.html',
       link: function(scope, element, attrs){
-
         var cfg,
             defaultConfig = {
               labels: {
@@ -505,7 +504,7 @@ angular.module('dhaval.directive.grid', [])
             scope.fetchPage();
           }
         });
-      }
+      } // end of link
     }
   }
 ]);

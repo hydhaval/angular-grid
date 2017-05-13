@@ -15,7 +15,7 @@
           <h3><a name="/{{example.id}}" href="#{{example.id}}">{{example.heading}}</a></h3>
 
           <div class="column">
-            <div angular-components-grid columns="example.columns" config="example.config" records="example.records"></div>
+            <div id="scrollable-area" when-scrolled="addMoreOnScroll()" angular-components-grid columns="example.columns" config="example.config" records="example.records"></div>
 
             <div ng-if="example.id == 'styling'" class="mt20">
               <h4>Available options:</h4>
@@ -35,7 +35,7 @@
   </div>
 
     <!-- angular dependencies -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.2.27/angular-sanitize.min.js"></script>
     <!-- angular app -->
     <script type="text/javascript" src="app.js"></script>
