@@ -51,8 +51,16 @@ angular
         { name: '<a href="">Bob</a>',      surname: 'Bar',      age: 26, gender: 'Male',   email: 'bob@example.org',    joined: '2002-06-20T19:21:00.839Z' },
         { name: '<a href="">John</a>',     surname: 'Smith',    age: 52, gender: 'Male',   email: 'john@example.org',   joined: '2008-11-12T06:02:10.839Z' },
         { name: '<a href="">Dhaval</a>',   surname: 'Patel', age: 25, gender: 'Male',   email: 'Dhaval@example.org', joined: '2014-02-06T09:31:09.839Z' },
-        { name: '<a href="">Hiren</a>',   surname: 'Reddy',    age: 30, gender: 'Male',   email: 'Hiren@example.org', joined: '2002-06-20T19:21:00.839Z' }        
+        { name: '<a href="">Hiren</a>',   surname: 'Reddy',    age: 30, gender: 'Male',   email: 'Hiren@example.org', joined: '2002-06-20T19:21:00.839Z' }
       ],
+
+      extend = function(){
+          for(var i=1; i<arguments.length; i++)
+              for(var key in arguments[i])
+                  if(arguments[i].hasOwnProperty(key))
+                      arguments[0][key] = arguments[i][key];
+          return arguments[0];
+      },
 
       config = function(cfg){
         var defaults = {
@@ -68,7 +76,7 @@ angular
           }
         };
 
-        return $.extend(true, angular.copy(defaults), cfg || {});
+        return extend(angular.copy(defaults), cfg || {});
       };
       angular.extend($scope, {
         helpers: {

@@ -170,7 +170,7 @@ angular.module('dhaval.directive.grid', [])
               }
             };
 
-        cfg = scope.config = $.extend(true, defaultConfig, scope.config);
+        cfg = scope.config = extend(defaultConfig, scope.config);
 
         angular.extend(scope, {
           /**
@@ -446,10 +446,16 @@ angular.module('dhaval.directive.grid', [])
             if(!sort || !cfg.viewConfig.sortable)
               return;
 
-            var target = $(event.target);
+            var target = event.target;
 
-            if(target.is('.ui-table-columns-menu') || target.parents('.ui-table-columns-menu').length || target.is('.icon-add'))
+            if(target.classList.contains('.ui-table-columns-menu') || target.classList.contains('.icon-add'))
               return false;
+
+            if(document.querySelector(event.target.className)) {
+              if(document.querySelector(event.target.className).parents('.ui-table-columns-menu').length) {
+                return false;
+              }
+            }
 
             return scope.sortColumn(id, sort);
           }
@@ -457,6 +463,14 @@ angular.module('dhaval.directive.grid', [])
 
 
           var sorting = cfg.sorting;
+
+          function extend(){
+              for(var i=1; i<arguments.length; i++)
+                  for(var key in arguments[i])
+                      if(arguments[i].hasOwnProperty(key))
+                          arguments[0][key] = arguments[i][key];
+              return arguments[0];
+          }
 
           scope.sortColumn(sorting.defaultColumn, sorting.type, sorting.direction);
 
@@ -468,7 +482,7 @@ angular.module('dhaval.directive.grid', [])
         });
 
         scope.$watch('config', function(n, o){
-          cfg = scope.config = $.extend(true, defaultConfig, n);
+          cfg = scope.config = extend(defaultConfig, n);
 
           var viewCfg = cfg.viewConfig,
               sortCfg = cfg.sorting;
