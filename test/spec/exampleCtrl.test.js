@@ -12,16 +12,14 @@ describe('calculator', function() {
     scope = $rootScope.$new();
   }));
 
-  describe('sum', function() {
-    it('1 + 1 should equal 2', function() {
+  describe('scope function validation', function() {
+    it('it should validate GetRecordData function', function() {
       var $scope = {};
       var controller = $controller('ExampleCtrl', {
         $scope: $scope
       });
-      $scope.x = 1;
-      $scope.y = 2;
-      $scope.sum();
-      expect($scope.z).toBe(3);
+      $scope.GetRecordData();
+      expect($scope.IsLoading).toBe(false);
     });
   });
 
