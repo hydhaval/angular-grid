@@ -1,6 +1,12 @@
-#Sample Angular Directive: Grid
+# Sample Angular Directive: Data Grid
 
-A customize table component with AJAX support.
+## This grid supports below features:
+* Fixed header
+* Sorting columns
+* Search for values across columns
+* Infinite scroll
+
+## This is fully customize grid component with AJAX support.
 
 ## How to install it
 
