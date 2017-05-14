@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
@@ -41,23 +41,32 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static(appConfig.app),
               connect().use('/src', connect.static('./src')),
-              connect().use('/__templates__', connect.static('./src/templates'))
+              connect().use('/__templates__', connect.static(
+                './src/templates'))
             ];
           }
         }
       }
     }
-});
+  });
 
   // Main tasks
-  grunt.registerTask('serve', 'Compile then start a connect web server', function () {
-    grunt.task.run([
-      'connect:livereload',
-      'watch'
-    ]);
-  });
+  grunt.registerTask('serve', 'Compile then start a connect web server',
+    function() {
+      grunt.task.run([
+        'connect:livereload',
+        'watch'
+      ]);
+    });
+
+  grunt.registerTask('test', [
+    'clean:test',
+    'html2js',
+    'karma'
+  ]);
+
 };
