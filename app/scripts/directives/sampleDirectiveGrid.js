@@ -6,12 +6,12 @@ angular.module('dhaval.directive.grid', [])
  * @param  {Mixed}   value The string or boolean to test
  * @return {Boolean}       The resut of the truthy/falsey test
  */
-.filter('isTrue', function(){
-  return function isTrue(value){
+.filter('isTrue', function() {
+  return function isTrue(value) {
     if(value == undefined)
       value = true;
 
-    if(typeof value == 'string'){
+    if(typeof value == 'string') {
       return value.toLowerCase() == 'true';
     }
 
@@ -124,7 +124,7 @@ angular.module('dhaval.directive.grid', [])
 })
 
 .directive('angularComponentsGrid', ['$window', '$location', '$filter', '$sce',
-  function($window, $location, $filter, $sce){
+  function($window, $location, $filter, $sce) {
     return {
       restrict: 'A',
       scope: {
@@ -132,8 +132,8 @@ angular.module('dhaval.directive.grid', [])
         columns: '=',
         config: '='
       },
-      templateUrl: '../templates/sample-directive-grid.html',
-      link: function(scope, element, attrs){
+      templateUrl: '../../templates/sample-directive-grid.html',
+      link: function(scope, element, attrs) {
         var cfg,
             defaultConfig = {
               labels: {

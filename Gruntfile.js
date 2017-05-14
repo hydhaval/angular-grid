@@ -43,10 +43,7 @@ module.exports = function(grunt) {
           open: true,
           middleware: function(connect) {
             return [
-              connect.static(appConfig.app),
-              connect().use('/src', connect.static('./src')),
-              connect().use('/__templates__', connect.static(
-                './src/templates'))
+              connect.static(appConfig.app)
             ];
           }
         }
