@@ -11,26 +11,29 @@
     <span>{{ labels.loading }}</span>
   </div>
 
-  <table ng-class="{ fetching: url && fetching, vlines: verticalLines }">
+  <table id="resizable-gird" ng-class="{ fetching: url && fetching, vlines: verticalLines }">
     <thead>
       <tr>
-        <th class="count" ng-show="numberedColumn">&nbsp;</th>
+        <th class="count" ng-show="numberedColumn"><div style="visibility: hidden">{{ records ? records.length : 0 }}.</div></th>
         <th class="count" >
           <input type="checkbox" ng-checked="all" ng-click="toggleAll()">
           <label ng-click="toggleAll()">&nbsp;</label>
         </th>
         <th ng-repeat="column in columns" class="{{column.cssClass || ''}}" ng-class="{ hand: !!sortable && !!column.sort, highlight: !!sortable && sort.key == column.id && highlightColumn }" ng-click="sortHelper($event, column.id, column.sort)" ng-show="columnsCollection[$index].show" style="width: {{ columnWidth }};">
-          <span>{{ column.text }}</span>
-          <i ng-class="{ 'icon-caret-up': !!sortable && sort.key == column.id && sort.direction === 'desc', 'icon-caret-down': !!sortable && sort.key == column.id && sort.direction === 'asc' }"></i>
-          <div class="ui-table-columns-menu-icon" ng-if="columnMenu" ng-class="{ show: columnsCollection[$index].menu }">
-            <i class="icon-add" ng-click="showColumnMenu(columnsCollection[$index])"></i>
-            <ul class="ui-table-columns-menu" ng-class="{ show: columnsCollection[$index].menu }" ng-mouseleave="columnsCollection[$index].menu = false">
-              <i ng-click="showColumnMenu(columnsCollection[$index])"></i>
-              <li ng-if="col.text.length" ng-repeat="col in columnsCollection track by $index">
-                <input id="column_{{ col.uid }}" ng-model="col.show" type="checkbox">
-                <label for="column_{{ col.uid }}">{{ col.text }}</label>
-              </li>
-            </ul>
+          <div class="table-header-container">
+            <div class="table-header-resizer"></div>
+            <span>{{ column.text }}</span>
+            <i ng-class="{ 'icon-caret-up': !!sortable && sort.key == column.id && sort.direction === 'desc', 'icon-caret-down': !!sortable && sort.key == column.id && sort.direction === 'asc' }"></i>
+            <div class="ui-table-columns-menu-icon" ng-if="columnMenu" ng-class="{ show: columnsCollection[$index].menu }">
+              <i class="icon-add" ng-click="showColumnMenu(columnsCollection[$index])"></i>
+              <ul class="ui-table-columns-menu" ng-class="{ show: columnsCollection[$index].menu }" ng-mouseleave="columnsCollection[$index].menu = false">
+                <i ng-click="showColumnMenu(columnsCollection[$index])"></i>
+                <li ng-if="col.text.length" ng-repeat="col in columnsCollection track by $index">
+                  <input id="column_{{ col.uid }}" ng-model="col.show" type="checkbox">
+                  <label for="column_{{ col.uid }}">{{ col.text }}</label>
+                </li>
+              </ul>
+            </div>
           </div>
         </th>
       </tr>
@@ -50,6 +53,6 @@
           <span ng-bind-html="process(pluck(record, column.id))" ng-if="!column.array && !column.url && !column.format && !column.date"></span>
         </td>
       </tr>
-    </tbody>  
+    </tbody>
   </table>
 </div>

@@ -78,7 +78,10 @@ angular.module('dhaval.directive.grid', [])
       var scores = [];
       scores = obj.filter(function(obj_item) {
         for(var k in obj_item) {
-        	if(obj_item[k].toString().includes(config.term.toString())) {
+          if(k==='joined') {
+            obj_item[k] = ($filter('date')(obj_item[k], "longDate").toString());
+          }
+          if(obj_item[k].toString().toLowerCase().includes(config.term.toString().toLowerCase())) {
             return true;
           }
         }
@@ -132,7 +135,7 @@ angular.module('dhaval.directive.grid', [])
         columns: '=',
         config: '='
       },
-      templateUrl: '../../templates/sample-directive-grid.html',
+      templateUrl: '../../templates/custom-data-grid.html',
       link: function(scope, element, attrs) {
         var cfg,
             defaultConfig = {
@@ -488,6 +491,14 @@ angular.module('dhaval.directive.grid', [])
             }
 
             return scope.sortColumn(id, sort);
+          },
+          /**
+           * Plug in support for resizable.
+           * Simple remove below call to disable this feature
+           * TODO: In future, add this as part of gird config.
+           */
+          makeTableResizable: function() {
+            ResizableColumns();
           }
         });
 
@@ -510,6 +521,7 @@ angular.module('dhaval.directive.grid', [])
         }, function(newVal, oldVal){
           if(newVal != oldVal && newVal > 0)
             scope.sortColumn(null, null, null, true);
+            scope.makeTableResizable();
         });
 
         scope.$watch('config', function(n, o){
