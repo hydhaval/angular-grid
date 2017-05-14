@@ -76,20 +76,14 @@ angular.module('dhaval.directive.grid', [])
         return obj;
 
       var scores = [];
-
-      angular.forEach(obj, function(item, index){
-        var values = $filter('map')(config.keys, function(key){
-          return item[key];
-        });
-
-        if(values && values.length){
-          var score = values.join('').score(config.term, fuzziness);
-
-          if(score > 0 && scores.indexOf(config.term) == -1)
-            scores.push(item);
+      scores = obj.filter(function(obj_item) {
+        for(var k in obj_item) {
+        	if(obj_item[k].toString().includes(config.term.toString())) {
+            return true;
+          }
         }
+        return false;
       });
-
       return scores;
     };
   }
@@ -198,6 +192,38 @@ angular.module('dhaval.directive.grid', [])
           columnWidth: function(){
             return (100 / scope.columns.length) + '%';
           }(),
+
+          toggleAll: function(){
+            var records = scope.records;
+            scope.all = !scope.all;
+            records.forEach(function(record){
+              scope.toggleSelected(record);
+            });
+            return scope.all;
+          },
+
+          /**
+           * Toggles the selected state of a record
+           * @param  {Object} record The table record
+           * @return {Boolean}       The true or false value
+           */
+          toggleSelected: function(record) {
+            var index = scope.selected.indexOf(record.id),
+                exists = index !== -1;
+
+            if(record.checked){
+              if(exists){
+                scope.selected.splice(index, 1);
+                scope.all = false;
+              }
+            }else{
+              !exists && scope.selected.push(record.id);
+            }
+
+            record.checked = !record.checked;
+
+            return record.checked;
+          },
           /**
            * Returns a modified version of the column data used for column menus
            * @return {Array} The collection of column data
@@ -449,10 +475,11 @@ angular.module('dhaval.directive.grid', [])
 
             if(target.classList.contains('.ui-table-columns-menu') || target.classList.contains('.icon-add'))
               return false;
-
-            if(document.querySelector(event.target.className)) {
-              if(document.querySelector(event.target.className).parents('.ui-table-columns-menu').length) {
-                return false;
+            if(document) {
+              if(document.querySelector(event.target.className)) {
+                if(document.querySelector(event.target.className).parents('.ui-table-columns-menu').length) {
+                  return false;
+                }
               }
             }
 
@@ -472,6 +499,7 @@ angular.module('dhaval.directive.grid', [])
           }
 
           scope.sortColumn(sorting.defaultColumn, sorting.type, sorting.direction);
+
 
         scope.$watch(function(scope){
           return scope.records && scope.records.length

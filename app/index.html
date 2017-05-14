@@ -18,12 +18,12 @@
             <div id="scrollable-area" when-scrolled="addMoreOnScroll()" angular-components-grid columns="example.columns" config="example.config" records="example.records"></div>
 
             <div ng-if="example.id == 'styling'" class="mt20">
-              <h4>Available options:</h4>
+              <h4 class="mb20">Available options:</h4>
               <ul class="options">
                 <li ng-repeat="option in helpers.viewConfig">
                   <label>
                     <input type="checkbox" ng-model="optionValue" ng-click="updateViewStyles(option, optionValue)">
-                    &nbsp;{{option}}
+                    &nbsp;{{option.label}}
                   </label>
                 </li>
               </ul>

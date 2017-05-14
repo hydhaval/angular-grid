@@ -105,7 +105,7 @@ angular
         { name: '<a href="">Dhaval</a>',   surname: 'Patel',    age: 25,  gender: 'Male',   email: 'Dhaval@example.org',joined: '2014-02-06T09:31:09.839Z' },
         { name: '<a href="">Hiren</a>',    surname: 'Reddy',    age: 40,  gender: 'Male',   email: 'Hiren@example.org', joined: '2002-06-20T19:21:00.839Z' },
         { name: '<a href="">April</a>',    surname: 'Chen',     age: 88,  gender: 'Male',   email: 'April@gmail.org',   joined: '2008-11-12T06:02:10.839Z' },
-        { name: '<a href="">Koala</a>',    surname: 'Lampoor',  age: 91,  gender: 'Female', email: 'Koala@yahoo.org',   joined: '2014-02-06T09:31:09.839Z' }        
+        { name: '<a href="">Koala</a>',    surname: 'Lampoor',  age: 91,  gender: 'Female', email: 'Koala@yahoo.org',   joined: '2014-02-06T09:31:09.839Z' }
       ];
 
       $scope.CurrentPage = 1;
@@ -159,7 +159,7 @@ angular
       function config(cfg){
         var defaults = {
           viewConfig: {
-            checkboxColumn: false,
+            checkboxColumn: true,
             clickableRows: false,
             columnMenu: false,
             filtering: false,
@@ -200,7 +200,12 @@ angular
            * Configurable view options
            * @type {Array}
            */
-          viewConfig: ['columnMenu', 'filtering', 'sortable', 'striped']
+          viewConfig: [
+            {key:"columnMenu",  label:"Column Menu (Click on + sign at column header on mouse hover)"},
+            {key:"filtering",   label:"Enable Filtering (Search across all columns)"},
+            {key:"sortable",    label:"Sort Columns"},
+            {key:"striped",     label:"Stripped"}
+          ]
         },
         /**
          * Apply/Remove styling to appearance example
@@ -208,7 +213,7 @@ angular
          * @param {Boolean} value  The value to set in the viewConfig property
          */
         updateViewStyles: function(option, value) {
-          $scope.examples[0].config = ($scope.examples[0].config.viewConfig[option] = (value = value));
+          $scope.examples[0].config = ($scope.examples[0].config.viewConfig[option.key] = (value = value));
         }
       });
 
