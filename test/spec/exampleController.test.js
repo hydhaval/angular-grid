@@ -1,4 +1,4 @@
-describe('ExampleCtrl', function() {
+describe('ExampleController', function() {
 
   beforeEach(module('app'));
 
@@ -94,10 +94,10 @@ describe('ExampleCtrl', function() {
       expect($scope.helpers.viewConfig[1].key).toEqual('filtering');
       expect($scope.helpers.viewConfig[2].key).toEqual('sortable');
       expect($scope.helpers.viewConfig[3].key).toEqual('striped');
-      expect($scope.helpers.viewConfig[0].label).toEqual('Column Menu (Click on + sign at column header on mouse hover)');
-      expect($scope.helpers.viewConfig[1].label).toEqual('Enable Filtering (Search across all columns)');
-      expect($scope.helpers.viewConfig[2].label).toEqual('Sort Columns');
-      expect($scope.helpers.viewConfig[3].label).toEqual('Stripped');
+      expect($scope.helpers.viewConfig[0].label).toEqual('Column menu (Click on + sign at column header on mouse hover)');
+      expect($scope.helpers.viewConfig[1].label).toEqual('Enable filtering (Search across all columns)');
+      expect($scope.helpers.viewConfig[2].label).toEqual('Enable column sorting');
+      expect($scope.helpers.viewConfig[3].label).toEqual('Stripped rows');
       expect($scope.updateViewStyles).toEqual(jasmine.any(Function));
     });
   });

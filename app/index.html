@@ -12,8 +12,6 @@
 
       <div ng-repeat="example in examples track by $index" class="box cf example-container">
         <div ng-if="example.id == 'styling'">
-          <h3><a name="/{{example.id}}" href="#{{example.id}}">{{example.heading}}</a></h3>
-
           <div class="column">
             <div id="scrollable-area" when-scrolled="addMoreOnScroll()" angular-components-grid columns="example.columns" config="example.config" records="example.records"></div>
 

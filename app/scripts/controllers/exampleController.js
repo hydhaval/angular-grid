@@ -199,10 +199,10 @@ angular
          * @type {Array}
          */
         viewConfig: [
-          {key:"columnMenu",  label:"Column Menu (Click on + sign at column header on mouse hover)"},
-          {key:"filtering",   label:"Enable Filtering (Search across all columns)"},
-          {key:"sortable",    label:"Sort Columns"},
-          {key:"striped",     label:"Stripped"}
+          {key:"columnMenu",  label:"Column menu (Click on + sign at column header on mouse hover)"},
+          {key:"filtering",   label:"Enable filtering (Search across all columns)"},
+          {key:"sortable",    label:"Enable column sorting"},
+          {key:"striped",     label:"Stripped rows"}
         ]
       },
       /**
