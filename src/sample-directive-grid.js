@@ -195,10 +195,14 @@ angular.module('dhaval.directive.grid', [])
 
           toggleAll: function(){
             var records = scope.records;
-            scope.all = !scope.all;
             records.forEach(function(record){
-              scope.toggleSelected(record);
+              if(scope.all) {
+                record.checked = false;
+              } else {
+                record.checked = true;
+              }
             });
+            scope.all = !scope.all;
             return scope.all;
           },
 
