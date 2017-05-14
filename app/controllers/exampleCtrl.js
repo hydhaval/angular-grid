@@ -139,7 +139,6 @@ angular
       };
 
       $scope.addMoreOnScroll = function () {
-        console.log("addMoreOnScroll called");
        if ($scope.CurrentPage < $scope.TotalPage) {
            $scope.CurrentPage += 1;
            $scope.GetRecordData($scope.CurrentPage);
@@ -148,100 +147,92 @@ angular
 
     $scope.GetRecordData($scope.CurrentPage);
 
-      function extend(){
-          for(var i=1; i<arguments.length; i++)
-              for(var key in arguments[i])
-                  if(arguments[i].hasOwnProperty(key))
-                      arguments[0][key] = arguments[i][key];
-          return arguments[0];
-      };
+    function extend() {
+      for(var i=1; i<arguments.length; i++)
+          for(var key in arguments[i])
+              if(arguments[i].hasOwnProperty(key))
+                  arguments[0][key] = arguments[i][key];
+      return arguments[0];
+    };
 
-      function config(cfg){
-        var defaults = {
+    function config(cfg) {
+      var defaults = {
+        viewConfig: {
+          checkboxColumn: true,
+          clickableRows: false,
+          columnMenu: false,
+          filtering: false,
+          numberedColumn: true,
+          sortable: false,
+          striped: false,
+          verticalLines: false
+        }
+      };
+      return extend(angular.copy(defaults), cfg || {});
+    };
+
+    angular.extend($scope, {
+      helpers: {
+        sortingCfg: {
+          sorting: {
+            defaultColumn: 'name',
+            direction: 'asc',
+            highlightColumn: false
+          },
           viewConfig: {
-            checkboxColumn: true,
+            sortable: true
+          }
+        },
+        viewCfg: {
+          viewConfig: {
+            checkboxColumn: false,
             clickableRows: false,
             columnMenu: false,
             filtering: false,
-            numberedColumn: true,
+            numberedColumn: false,
             sortable: false,
             striped: false,
             verticalLines: false
           }
-        };
-
-        return extend(angular.copy(defaults), cfg || {});
-      };
-      angular.extend($scope, {
-        helpers: {
-          sortingCfg: {
-            sorting: {
-              defaultColumn: 'name',
-              direction: 'asc',
-              highlightColumn: false
-            },
-            viewConfig: {
-              sortable: true
-            }
-          },
-          viewCfg: {
-            viewConfig: {
-              checkboxColumn: false,
-              clickableRows: false,
-              columnMenu: false,
-              filtering: false,
-              numberedColumn: false,
-              sortable: false,
-              striped: false,
-              verticalLines: false
-            }
-          },
-          /**
-           * Configurable view options
-           * @type {Array}
-           */
-          viewConfig: [
-            {key:"columnMenu",  label:"Column Menu (Click on + sign at column header on mouse hover)"},
-            {key:"filtering",   label:"Enable Filtering (Search across all columns)"},
-            {key:"sortable",    label:"Sort Columns"},
-            {key:"striped",     label:"Stripped"}
-          ]
         },
         /**
-         * Apply/Remove styling to appearance example
-         * @param {String}  option The viewConfig property to modify
-         * @param {Boolean} value  The value to set in the viewConfig property
+         * Configurable view options
+         * @type {Array}
          */
-        updateViewStyles: function(option, value) {
-          $scope.examples[0].config = ($scope.examples[0].config.viewConfig[option.key] = (value = value));
-        }
-      });
-
+        viewConfig: [
+          {key:"columnMenu",  label:"Column Menu (Click on + sign at column header on mouse hover)"},
+          {key:"filtering",   label:"Enable Filtering (Search across all columns)"},
+          {key:"sortable",    label:"Sort Columns"},
+          {key:"striped",     label:"Stripped"}
+        ]
+      },
+      /**
+       * Apply/Remove styling to appearance example
+       * @param {String}  option The viewConfig property to modify
+       * @param {Boolean} value  The value to set in the viewConfig property
+       */
+      updateViewStyles: function(option, value) {
+        $scope.examples[0].config = ($scope.examples[0].config.viewConfig[option.key] = (value = value));
+      }
+    });
     }
   ])
 
-  .directive("whenScrolled", function(){
-      return{
-
+  .directive("whenScrolled", function() {
+      return {
         restrict: 'A',
-        link: function(scope, elem, attrs){
-        console.log('directive!');
+        link: function(scope, elem, attrs) {
           // we get a list of elements of size 1 and need the first element
           var raw = elem[0];
 
           // we load more elements when scrolled past a limit
-          elem.bind("scroll", function(){
-            console.log("INSIDE SCROLLED");
-            if(raw.scrollTop+raw.offsetHeight-1 >= raw.scrollHeight){
+          elem.bind("scroll", function() {
+            if(raw.scrollTop+raw.offsetHeight-1 >= raw.scrollHeight) {
               scope.loading = true;
-            // we can give any function which loads more elements into the list
+              // we can give any function which loads more elements into the list
               scope.$apply(attrs.whenScrolled);
             }
           });
-
-          console.log("binding should be done");
         }
-
-
       }
 });
