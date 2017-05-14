@@ -132,7 +132,7 @@ angular.module('dhaval.directive.grid', [])
         columns: '=',
         config: '='
       },
-      templateUrl: '/__templates__/sample-directive-grid.html',
+      templateUrl: '../templates/sample-directive-grid.html',
       link: function(scope, element, attrs){
         var cfg,
             defaultConfig = {
