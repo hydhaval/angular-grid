@@ -63,10 +63,4 @@ module.exports = function(grunt) {
       ]);
     });
 
-  grunt.registerTask('test', [
-    'clean:test',
-    'html2js',
-    'karma'
-  ]);
-
 };
