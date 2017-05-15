@@ -1,5 +1,7 @@
 # Angular Directive for Data Grid
 
+[![Build Status](https://travis-ci.org/hydhaval/angular-grid.svg?branch=master)](https://travis-ci.org/hydhaval/angular-grid)
+
 ## Component supports below features:
 * Fixed column header
 * Sorting columns
