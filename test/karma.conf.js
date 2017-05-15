@@ -14,7 +14,6 @@ module.exports = function(config) {
       'test/libs/angular.min.js',
       'test/libs/angular-mocks.js',
       'app/**/*.js',
-      'src/**/*.js',
       'test/**/*.js'
     ],
 
@@ -36,7 +35,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false,
+    singleRun: true,
 
     colors: true,
 
