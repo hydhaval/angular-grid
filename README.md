@@ -16,10 +16,9 @@
 ## Demo
 https://hydhaval.github.io/angular-grid/dist/
 
-
 ## How to install it
 
-Run
+Run:
 ```
 npm install
 grunt serve
@@ -27,7 +26,7 @@ grunt serve
 
 ### For Unit test
 
-Run
+Run:
 ```
 npm test
 ```
