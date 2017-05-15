@@ -67,7 +67,7 @@ angular.module('dhaval.directive.grid', [])
  */
 .filter('score', ['$filter',
   function($filter){
-    return function score(obj, config, fuzziness){
+    return function score(obj, config, fuzziness) {
 
       if(!config)
         return obj;
@@ -552,5 +552,3 @@ angular.module('dhaval.directive.grid', [])
     }
   }
 ]);
-
-String.prototype.score = function(e,t){ if(this==e){return 1}if(e==""){return 0}var n=0,r=e.length,i=this,s=i.length,o,u,a=1,f;for(var l=0,c,h,p,d,v,m;l<r;++l){p=e.charAt(l);d=i.indexOf(p.toLowerCase());v=i.indexOf(p.toUpperCase());m=Math.min(d,v);h=m>-1?m:Math.max(d,v);if(h===-1){return 0}else{c=.1}if(i[h]===p){c+=.1}if(h===0){c+=.6;if(l===0){o=1}}else{if(i.charAt(h-1)===" "){c+=.8}}i=i.substring(h+1,s);n+=c}u=n/r;f=(u*(r/s)+u)/2;f=f/a;if(o&&f+.15<1){f+=.15}return f };
