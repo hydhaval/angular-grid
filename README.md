@@ -1,14 +1,15 @@
 # Angular Directive for Data Grid
 
 ## Component supports below features:
-* Fixed header
+* Fixed column header
 * Sorting columns
 * Search for values across columns
 * Infinite scroll
+* Ability to resize columns (All browser except Safari)
+* Ability to select/deselect all rows
 * Grid is fully customizable ranging from:
   * Dynamically add/remove columns
   * Dynamically enable/disable key features like sorting, searching etc..
-* Grid is designed to have fixed column header and infinite scroll.
 * Grid is easily plugable with any AJAX calls for data.
 
 
