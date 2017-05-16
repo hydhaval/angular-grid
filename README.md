@@ -20,6 +20,12 @@ https://hydhaval.github.io/angular-grid/dist/
 
 ## How to install it
 
+### if you don't have global grunt 
+Run:
+```
+npm install -g grunt   (you might need sudo)
+```
+
 Run:
 ```
 npm install
